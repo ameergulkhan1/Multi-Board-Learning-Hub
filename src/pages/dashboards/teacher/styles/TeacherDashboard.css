@@ -1,0 +1,283 @@
+.teacher-dashboard {
+  padding: 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  min-height: 100vh;
+}
+
+.welcome-section {
+  margin-bottom: 2.5rem;
+  animation: slideDown 500ms ease-out;
+}
+
+.welcome-heading {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #1f2937;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  letter-spacing: -1px;
+}
+
+.welcome-subtext {
+  font-size: 1rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.08);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(79, 70, 229, 0.15);
+  border-color: #4f46e5;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.stat-content {
+  position: relative;
+  z-index: 2;
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #1f2937;
+  margin: 0;
+}
+
+.section-header {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1f2937;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.classes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.class-card {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.08);
+  transition: all 300ms ease;
+  border-left: 4px solid #4f46e5;
+  cursor: pointer;
+}
+
+.class-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.15);
+}
+
+.class-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+}
+
+.class-subject {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 0 0 1rem 0;
+}
+
+.class-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.class-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.class-stat-value {
+  font-weight: 800;
+  color: #4f46e5;
+  font-size: 1.25rem;
+}
+
+.class-stat-label {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.pending-badge {
+  display: inline-block;
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 0.35rem 0.75rem;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.table-container {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.08);
+  margin-bottom: 2.5rem;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  background: #f9fafb;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 800;
+  color: #1f2937;
+  border-bottom: 2px solid #e5e7eb;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table tr:hover {
+  background: #f9fafb;
+  transition: background 200ms ease;
+}
+
+.student-name {
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.score-cell {
+  font-weight: 800;
+  color: #4f46e5;
+  font-size: 1.1rem;
+}
+
+.attendance {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.status-excellent {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-good {
+  background: #dbeafe;
+  color: #0c4a6e;
+}
+
+.status-needs-improvement {
+  background: #fecaca;
+  color: #7f1d1d;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .teacher-dashboard {
+    padding: 1rem;
+  }
+
+  .welcome-heading {
+    font-size: 1.75rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .classes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .table {
+    font-size: 0.85rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.75rem;
+  }
+}
