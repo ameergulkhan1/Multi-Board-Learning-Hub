@@ -6,7 +6,7 @@ import type {} from './styles/AdminDashboard.css';
 const AdminDashboard: React.FC = () => {
   const [adminName] = useState<string>('Administrator');
 
-  const sidebarItems = getAdminSidebarItems('/dashboard');
+  const sidebarItems = getAdminSidebarItems('/admin/dashboard');
 
   const systemMetrics = {
     totalUsers: 5847,

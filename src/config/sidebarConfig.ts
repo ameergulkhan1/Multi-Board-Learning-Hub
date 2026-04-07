@@ -101,7 +101,7 @@ export const getParentSidebarItems = (currentPath: string): SidebarItem[] => {
  * Admin Dashboard Sidebar (Role-specific)
  */
 export const ADMIN_SIDEBAR_ITEMS: SidebarItem[] = [
-  { label: 'Dashboard', href: '/dashboard', icon: '📊' },
+  { label: 'Dashboard', href: '/admin/dashboard', icon: '📊' },
   { label: 'User Management', href: '/admin/users', icon: '👥' },
   { label: 'Courses', href: '/admin/courses', icon: '📚' },
   { label: 'Analytics', href: '/admin/analytics', icon: '📈' },

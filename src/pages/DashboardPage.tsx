@@ -1,88 +1,100 @@
-import React, { useState } from 'react';
-import { MainLayout } from '../components/layout/MainLayout.tsx';
-import { DashboardCard } from '../components/ui/DashboardCard.tsx';
-import { getRoleAwareSidebarItems } from '../config/sidebarConfig.ts';
-import { useAuth } from '../hooks/useAuth.ts';
+import { useState } from 'react';
+import { MainLayout } from '../components/layout/MainLayout';
+import { getRoleAwareSidebarItems } from '../config/sidebarConfig';
+import { useAuth } from '../hooks/useAuth';
+import styled from 'styled-components';
+import theme from '../styles/theme';
+import DashboardComponent from '../features/dashboard/components/DashboardComponent';
+import TextbookComponent from '../features/textbook/components/TextbookComponent';
+import AssessmentComponent from '../features/assessment/components/AssessmentComponent';
+import ExaminationComponent from '../features/examination/components/ExaminationComponent';
+import AssistantComponent from '../features/assistant/components/AssistantComponent';
+import CollaborationComponent from '../features/collaboration/components/CollaborationComponent';
+import TeacherParentComponent from '../features/teacher-parent/components/TeacherParentComponent';
+import MultilingualComponent from '../features/multilingual/components/MultilingualComponent';
+
+const PageContainer = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  background: ${theme.colors.bg.secondary};
+`;
+
+const NavBar = styled.nav`
+  background: white;
+  border-bottom: 2px solid ${theme.colors.border.light};
+  padding: ${theme.spacing.md} ${theme.spacing.lg};
+  display: flex;
+  gap: ${theme.spacing.md};
+  overflow-x: auto;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: ${theme.shadows.sm};
+`;
+
+const NavButton = styled.button<{ $active?: boolean }>`
+  padding: ${theme.spacing.sm} ${theme.spacing.lg};
+  border: 2px solid ${props => props.$active ? theme.colors.primary.main : theme.colors.border.light};
+  background: ${props => props.$active ? theme.colors.primary.lighter : 'white'};
+  color: ${props => props.$active ? theme.colors.primary.main : theme.colors.text.primary};
+  border-radius: ${theme.borderRadius.md};
+  cursor: pointer;
+  font-weight: ${theme.typography.fontWeight.semibold};
+  font-size: ${theme.typography.fontSize.sm};
+  white-space: nowrap;
+  transition: all ${theme.transition.fast};
+  
+  &:hover {
+    border-color: ${theme.colors.primary.main};
+    color: ${theme.colors.primary.main};
+  }
+`;
+
+const ContentSection = styled.div`
+  width: 100%;
+`;
 
 export const DashboardPage = () => {
   const { user } = useAuth();
-  const [isLoading] = useState(false);
   const sidebarItems = getRoleAwareSidebarItems('/dashboard', user?.role);
+  const [activeModule, setActiveModule] = useState<
+    'dashboard' | 'textbook' | 'assessment' | 'examination' | 'assistant' | 'collaboration' | 'teacher-parent' | 'multilingual'
+  >('dashboard');
+
+  // Define modules with their display info
+  const modules = [
+    { id: 'dashboard', label: '📊 Dashboard', component: DashboardComponent },
+    { id: 'textbook', label: '📚 Textbook', component: TextbookComponent },
+    { id: 'assessment', label: '🧪 Assessment', component: AssessmentComponent },
+    { id: 'examination', label: '📝 Exam', component: ExaminationComponent },
+    { id: 'assistant', label: '🤖 Assistant', component: AssistantComponent },
+    { id: 'collaboration', label: '🤝 Collaborate', component: CollaborationComponent },
+    { id: 'teacher-parent', label: '👨‍🏫 Teacher', component: TeacherParentComponent },
+    { id: 'multilingual', label: '🌍 Languages', component: MultilingualComponent },
+  ];
+
+  const ActiveComponent = modules.find(m => m.id === activeModule)?.component || DashboardComponent;
 
   return (
     <MainLayout showSidebar={true} sidebarItems={sidebarItems}>
-      <div>
-        <h1>Dashboard</h1>
-        <p>Welcome to your learning dashboard. Track your progress and achievements.</p>
-
-        <div className="grid grid-3" style={{ marginTop: 'var(--spacing-xl)' }}>
-          <DashboardCard
-            title="Total Points"
-            value="2,450"
-            icon="🏆"
-            isLoading={isLoading}
-            trend="up"
-            trendValue="+12% from last week"
-          />
-          <DashboardCard
-            title="Assignments"
-            value="8/12"
-            icon="📋"
-            isLoading={isLoading}
-            trend="up"
-            trendValue="4 completed"
-          />
-          <DashboardCard
-            title="Average Score"
-            value="87%"
-            icon="⭐"
-            isLoading={isLoading}
-            trend="up"
-            trendValue="+5% improvement"
-          />
-        </div>
-
-        <div style={{ marginTop: 'var(--spacing-2xl)' }}>
-          <h2>Recent Activity</h2>
-          <div className="card">
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-              <thead>
-                <tr style={{ borderBottom: '2px solid var(--border-color)' }}>
-                  <th style={{ textAlign: 'left', padding: 'var(--spacing-md)' }}>
-                    Activity
-                  </th>
-                  <th style={{ textAlign: 'left', padding: 'var(--spacing-md)' }}>
-                    Date
-                  </th>
-                  <th style={{ textAlign: 'left', padding: 'var(--spacing-md)' }}>
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {['Math Quiz Completed', 'Science Assignment', 'English Test'].map(
-                  (activity, idx) => (
-                    <tr
-                      key={idx}
-                      style={{
-                        borderBottom: '1px solid var(--border-color)',
-                      }}
-                    >
-                      <td style={{ padding: 'var(--spacing-md)' }}>{activity}</td>
-                      <td style={{ padding: 'var(--spacing-md)' }}>
-                        {new Date(Date.now() - idx * 86400000).toLocaleDateString()}
-                      </td>
-                      <td style={{ padding: 'var(--spacing-md)' }}>
-                        <span className="badge badge-success">Completed</span>
-                      </td>
-                    </tr>
-                  )
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <PageContainer>
+        <NavBar>
+          {modules.map((module) => (
+            <NavButton
+              key={module.id}
+              $active={activeModule === module.id}
+              onClick={() => setActiveModule(module.id as any)}
+            >
+              {module.label}
+            </NavButton>
+          ))}
+        </NavBar>
+        <ContentSection>
+          <ActiveComponent />
+        </ContentSection>
+      </PageContainer>
     </MainLayout>
   );
 };
+
+export default DashboardPage;

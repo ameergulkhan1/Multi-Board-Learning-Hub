@@ -8,7 +8,14 @@ import { StudentDashboard } from './pages/dashboards/student/StudentDashboard.ts
 import { TeacherDashboard } from './pages/dashboards/teacher/TeacherDashboard.tsx';
 import { ParentDashboard } from './pages/dashboards/parent/ParentDashboard.tsx';
 import AdminDashboard from './pages/dashboards/admin/AdminDashboard.tsx';
-import { DashboardPage } from './pages/DashboardPage.tsx';
+import UserManagement from './pages/dashboards/admin/pages/UserManagement.tsx';
+import CourseManagement from './pages/dashboards/admin/pages/CourseManagement.tsx';
+import Analytics from './pages/dashboards/admin/pages/Analytics.tsx';
+import ContentModeration from './pages/dashboards/admin/pages/ContentModeration.tsx';
+import AdminSettings from './pages/dashboards/admin/pages/AdminSettings.tsx';
+import Security from './pages/dashboards/admin/pages/Security.tsx';
+import Reports from './pages/dashboards/admin/pages/Reports.tsx';
+
 import { TextbookPage } from './pages/TextbookPage.tsx';
 import { AssessmentPage } from './pages/AssessmentPage.tsx';
 import { ExaminationPage } from './pages/ExaminationPage.tsx';
@@ -94,6 +101,40 @@ function AppContent() {
       <Route 
         path="/admin-dashboard" 
         element={<ProtectedRoute element={<AdminDashboard />} requiredRole="admin" />} 
+      />
+      
+      {/* Admin Sub-pages */}
+      <Route 
+        path="/admin/dashboard" 
+        element={<ProtectedRoute element={<AdminDashboard />} requiredRole="admin" />} 
+      />
+      <Route 
+        path="/admin/users" 
+        element={<ProtectedRoute element={<UserManagement />} requiredRole="admin" />} 
+      />
+      <Route 
+        path="/admin/courses" 
+        element={<ProtectedRoute element={<CourseManagement />} requiredRole="admin" />} 
+      />
+      <Route 
+        path="/admin/analytics" 
+        element={<ProtectedRoute element={<Analytics />} requiredRole="admin" />} 
+      />
+      <Route 
+        path="/admin/moderation" 
+        element={<ProtectedRoute element={<ContentModeration />} requiredRole="admin" />} 
+      />
+      <Route 
+        path="/admin/settings" 
+        element={<ProtectedRoute element={<AdminSettings />} requiredRole="admin" />} 
+      />
+      <Route 
+        path="/admin/security" 
+        element={<ProtectedRoute element={<Security />} requiredRole="admin" />} 
+      />
+      <Route 
+        path="/admin/reports" 
+        element={<ProtectedRoute element={<Reports />} requiredRole="admin" />} 
       />
 
       {/* Generic Dashboard (redirects to role-specific) */}
